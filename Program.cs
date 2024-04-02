@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NameSorter.File;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -17,18 +19,9 @@ namespace NameSorter
                 return;
             }
 
-            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            // Specify the file path
-            string filePath = Path.Combine(currentDirectory, args[0]);
-
-            // Read the contents of the file into a list
-            List<string> nameList = File.ReadAllLines(filePath).ToList();
-
-            foreach (var name in nameList)
-            {
-                Console.WriteLine(name);
-            }
+            var serviceProvider = DependencyServiceProvider.BuildServiceProvider();
+            var sorter = serviceProvider.GetRequiredService<Sorter>();
+            sorter.Sort(args[0]);            
         }
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NameSorter
+namespace NameSorter.File
 {
-    internal class ServiceProvider
+    public interface IFileManager
     {
+        List<string> ReadAllLines(string filePath);
     }
 }
