@@ -9,5 +9,7 @@ namespace NameSorter.File
     public interface IFileManager
     {
         List<string> ReadAllLines(string filePath);
+
+        void WriteAllLines(List<string> names);
     }
 }
