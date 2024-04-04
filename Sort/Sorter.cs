@@ -5,11 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NameSorter
+namespace NameSorter.Sort
 {
-    public class Sorter
+    public class Sorter : ISorter
     {
         private readonly IFileManager _fileManager;
+
+        public Sorter()
+        {
+
+        }
 
         public Sorter(IFileManager fileManager)
         {
@@ -30,7 +35,6 @@ namespace NameSorter
             // Check if the correct number of arguments is provided
             if (args.Length != 1)
             {
-                Console.WriteLine("File name as argument needs to be provided");
                 throw new Exception("File name as argument needs to be provided");
             }
 
@@ -44,17 +48,19 @@ namespace NameSorter
             return _fileManager.ReadAllLines(filePath);
         }
 
-        private List<string> SortNames(List<string> names)
+        public List<string> SortNames(List<string> names)
         {
-           return names
-                .Select(p => new {  
-                    firstWord = p.Split(' ').First(),
-                    lastWord = p.Split(' ').Last(), 
-                    fullWord = p })
-                .OrderBy(p => p.lastWord)
-                .ThenBy(p => p.firstWord)
-                .Select(p => p.fullWord)
-                .ToList();       
+            return names
+                 .Select(p => new
+                 {
+                     firstWord = p.Split(' ').First(),
+                     lastWord = p.Split(' ').Last(),
+                     fullWord = p
+                 })
+                 .OrderBy(p => p.lastWord)
+                 .ThenBy(p => p.firstWord)
+                 .Select(p => p.fullWord)
+                 .ToList();
         }
 
         private void ConsoleLogSortedNames(List<string> names)

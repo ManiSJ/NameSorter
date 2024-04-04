@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using NameSorter.File;
+using NameSorter.Sort;
 
 namespace NameSorter
 {
@@ -14,7 +15,7 @@ namespace NameSorter
         {
             return new ServiceCollection()
                    .AddTransient<IFileManager, FileManager>()
-                   .AddSingleton<Sorter>()
+                   .AddTransient<ISorter, Sorter>()
                    .BuildServiceProvider();
         }
     }

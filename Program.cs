@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NameSorter.File;
+using NameSorter.Sort;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace NameSorter
         public static void Main(string[] args)
         {           
             var serviceProvider = DependencyServiceProvider.BuildServiceProvider();
-            var sorter = serviceProvider.GetRequiredService<Sorter>();
+            var sorter = serviceProvider.GetRequiredService<ISorter>();
             sorter.Sort(args);            
         }
     }
