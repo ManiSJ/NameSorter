@@ -25,7 +25,6 @@ pipeline {
         }
         stage('Publish') {
             steps {
-                // Publish the console app to the C:\Users\username\AppData\Local\YourConsoleApp folder
                 script {
                     def sysUsername = powershell(returnStdout: true, script: env.POWER_SCRIPT).trim()
                     bat "dotnet publish NameSorter.sln -c Release -o C:\\Users\\${sysUsername}\\AppData\\Local\\NameSorter"
