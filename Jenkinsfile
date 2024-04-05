@@ -12,19 +12,20 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Clean and build the console app
+                // Clean and build solution
                 bat 'dotnet clean NameSorter.sln'
                 bat 'dotnet build NameSorter.sln'
             }
         }
         stage('Test') {
             steps {
-                // Run tests
+                // Run test project on solution
                 bat 'dotnet test NameSorter.sln'
             }
         }
         stage('Publish') {
             steps {
+                // Publish solution
                 script {
                     def sysUsername = powershell(returnStdout: true, script: env.POWER_SCRIPT).trim()
                     bat "dotnet publish NameSorter.sln -c Release -o C:\\Users\\${sysUsername}\\AppData\\Local\\NameSorter"
@@ -36,7 +37,10 @@ pipeline {
                 // Run the console app with arguments from the published folder
                 script {
                     def sysUsername = powershell(returnStdout: true, script: env.POWER_SCRIPT).trim()
-                    bat "C:\\Users\\${sysUsername}\\AppData\\Local\\NameSorter\\NameSorter.exe unsorted-names-list.txt"
+                    dir("C:\\Users\\${sysUsername}\\AppData\\Local\\NameSorter") {
+                        // Run the executable
+                        bat "NameSorter.exe unsorted-names-list.txt"
+                    }
                 }
             }
         }
