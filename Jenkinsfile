@@ -49,7 +49,7 @@ pipeline {
             script {
                 def sysUsername = powershell(returnStdout: true, script: env.POWER_SCRIPT).trim()
                 // Archive artifacts using the system username in the path
-                archiveArtifacts artifacts: "C:/Users/${sysUsername}/AppData/Local/NameSorter/**"
+                archiveArtifacts artifacts: "NameSorter/**"
             }
         }
         failure {
