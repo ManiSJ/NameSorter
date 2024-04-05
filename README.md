@@ -1,6 +1,6 @@
 Sort names by last name and then by given name.
 
-Tech stack - Net 7.0 Console app, xUnit, Shoudly, Jenkins
+Tech stack - Net 7.0 Console app, xUnit, Shouldly, Jenkins
 
 How to Run - NameSorter.exe unsorted-names-list.txt
 
