@@ -36,7 +36,7 @@ pipeline {
                 // Run the console app with arguments from the published folder
                 script {
                     def sysUsername = powershell(returnStdout: true, script: env.POWER_SCRIPT).trim()
-                    bat 'C:\\Users\\${sysUsername}\\AppData\\Local\\NameSorter\\NameSorter.exe unsorted-names-list.txt'
+                    bat "C:\\Users\\${sysUsername}\\AppData\\Local\\NameSorter\\NameSorter.exe unsorted-names-list.txt"
                 }
             }
         }
